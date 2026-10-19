@@ -5,7 +5,7 @@ Audio taken from "Lecture 1, Introduction ｜ MIT RES.6.007 Signals and Systems,
 Access notebook here: https://shreeshbhat04-ctrl.github.io/Assignment/
 
 ## Additional exploration
-See [Open test notebook](miscellaneous/test.ipynb) for the parameter studies (window length, overlap, Griffin-Lim iterations,abt FGLA and othere recovering methods, filter families and bands).
+See [Open test notebook](miscilleaneous/test.ipynb) for the parameter studies (window length, overlap, Griffin-Lim iterations,abt FGLA and othere recovering methods, filter families and bands).
 
 # Answers to all the questions
 - # What is the difference between the original and sig1. Give reasoning and analysis.
@@ -195,7 +195,7 @@ Runtime: about 15 minutes. The random seed is fixed, so results are reproducible
 - sig2 (random phase):  -0.06849297798356647 and SI-SDR =  -23.266639530896768,STOI 0.86
 - A random PH1 gives a complex sig2  max|imag| = 5.93e-2 against max|real| = 6.37e-2; an odd PH1 with DC/Nyquist = 0 gives a real one 1.24e-17.
 - Recovery: from the scrambled signal, STOI 0.85 (no gain); with the true magnitude (oracle), STOI 0.99 but SI-SDR -25.19 dB.
-- Noise: STOI vs SNR table in [miscilleaneous/recovery_results.csv](miscellaneous/recovery_results.ipynb).
+- Noise: STOI vs SNR table in [miscilleaneous/recovery_results.csv](miscilleaneous/recovery_results.csv).
 - Band-pass: SNR gain white 4.24 dB, machine gun 1.12 dB, babble 0.06 dB; change in STOI within ±0.0014.
 
 ## Assumptions and interpretations
