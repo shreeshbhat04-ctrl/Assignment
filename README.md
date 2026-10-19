@@ -182,13 +182,13 @@ Runtime: about 15 minutes. The random seed is fixed, so results are reproducible
 | Band-pass | [4th-order Butterworth, zero-phase (`sosfiltfilt`), 100-4000 Hz] |
 
 ## Task coverage
-| Task item | Where | Output |
-|---|---|---|
-| 2: STFT magnitude and phase plots, sig1 
-| 3: sig2 with PH1, real-valuedness 
-| 4: pattern in PH1 for real sig2 
-| 5: odd random phase, recovery, noise, STOI 
-| 6: repeat for each noise, band-pass
+| Task item | functions
+|---|---|
+| 2: STFT magnitude and phase plots, sig1  fnc_2to5
+| 3: sig2 with PH1, real-valuedness        cont_fnc_2to5
+| 4: pattern in PH1 for real sig2          cont_fnc_2to5
+| 5: odd random phase, recovery, noise, STOI  fnc_randnoise
+
 
 ## Key findings
 - sig1 (zero phase): correlation with original 0.04324382013486052, SI-SDR -27.3 dB. dB, STOI 0.841999826349695.
