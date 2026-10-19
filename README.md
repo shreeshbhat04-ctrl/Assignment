@@ -184,10 +184,10 @@ Runtime: about 15 minutes. The random seed is fixed, so results are reproducible
 ## Task coverage
 | Task item | functions
 |---|---|
-| 2: STFT magnitude and phase plots, sig1  fnc_2to5
-| 3: sig2 with PH1, real-valuedness        cont_fnc_2to5
-| 4: pattern in PH1 for real sig2          cont_fnc_2to5
-| 5: odd random phase, recovery, noise, STOI  fnc_randnoise
+| 2: STFT magnitude and phase plots, sig1 | fnc_2to5 |
+| 3: sig2 with PH1, real-valuedness       | cont_fnc_2to5 |
+| 4: pattern in PH1 for real sig2          | cont_fnc_2to5  |
+| 5: odd random phase, recovery, noise, STOI | fnc_randnoise |
 
 
 ## Key findings
