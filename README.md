@@ -1,10 +1,11 @@
 # STFT Magnitude/Phase and STOI Analysis 
 
 Short description: experiments on the role of STFT magnitude and phase in speech, reconstruction from magnitude only, phase scrambling and recovery, and the effect of noise and band-pass filtering on STOI.
+Audio taken from "Lecture 1, Introduction ｜ MIT RES.6.007 Signals and Systems, Spring 2011" 10 sec
 Access notebook here: https://shreeshbhat04-ctrl.github.io/Assignment/
 
 ## Additional exploration
-See `miscillaneous/test.ipynb`[miscilleaneous/test.ipynb] for the parameter studies (window length, overlap, Griffin-Lim iterations, filter families and bands).
+See [Open test notebook](miscellaneous/test.ipynb) for the parameter studies (window length, overlap, Griffin-Lim iterations,abt FGLA and othere recovering methods, filter families and bands).
 
 # Answers to all the questions
 - # What is the difference between the original and sig1. Give reasoning and analysis.
@@ -49,7 +50,7 @@ def si_sdr(ref, est, eps=1e-12):
 - Because the phase patterns are unrelated, the waveforms are unrelated 
 ![alt text](image.png)
 - # Is there a pattern in PH1 that ensures real valued sig2? 
-- so the sig2 to be real time_signal should satisify x[N-k]=conj(x[k])
+- so the sig2 to be real time_signal should satisify X[N-k]=conj(X[k])
 - so PH1[N−k] = −PH1[k] for k = 1 … N/2 − 1 (the phase is an odd function of frequency; where MG = 0 the phase does not matter), and
 - PH1[0] and PH1[N/2] (DC and Nyquist) equal 0 or π, because these two bins must be real.
 
@@ -91,7 +92,7 @@ babble	       0.579	0.627	0.674	0.741	0.837
 # 5 and 6: scrambling, recovery, noise
 
 - Unintelligible version: MG with a random odd phase (DC and Nyquist = 0), so the inverse is real. STOI 0.86, SI-SDR -27.1 dB. It sounds robotic.
-- Recovery (Griffin-Lim, 300 iterations): from the scrambled signal's own magnitude.
+- Recovery (Fast Griffin-Lim, 300 iterations,momentum = 0.99): from the scrambled signal's own magnitude.
 - Reason: re-analysing the scrambled audio gives a damaged magnitude, since random-phase overlap-add is not a consistent STFT. The oracle(meaning not reconstructing MG with ift) restores intelligibility and spectral content, but a different phase, so the waveform is not the original.
 ```python
  def recover(x, sr, nfft, hop, n_iter=300, momentum=0.99, seed=0, mag=None):
@@ -115,42 +116,45 @@ STOI recovered oracle : 0.9985975227711728
 ## Contents
 ```
 .
-├── assignment.ipynb                 # Main notebook; since the notebook too large exported to html to view
-├── assignment.html                  # HTML export of the notebook
-├── report.pdf                     # Written report
-├── report.md                      # Optional Markdown report
-├── requirements.txt               # Python dependencies
-│   
-│── white.wav              # White noise from NOISEX-92
-│── machinegun.wav         # Machine-gun noise from NOISEX-92
-│── babble.wav             # Babble noise from NOISEX-92
+├── assignment.ipynb              # Main analysis notebook
+├── README.md                     # Project documentation
+├── requirements.txt              # Python dependencies
 │
-├── outputs/
-│   ├── noisy_audio/               # Speech mixed with noise at different SNRs
-│   │   ├── white_-2dB.wav
-│   │   ├── white_0dB.wav
-│   │   ├── white_2dB.wav
-│   │   ├── white_5dB.wav
-│   │   ├── white_10dB.wav
-│   │   ├── machinegun_-2dB.wav
-│   │   ├── machinegun_0dB.wav
-│   │   ├── machinegun_2dB.wav
-│   │   ├── machinegun_5dB.wav
-│   │   ├── machinegun_10dB.wav
-│   │   ├── babble_-2dB.wav
-│   │   ├── babble_0dB.wav
-│   │   ├── babble_2dB.wav
-│   │   ├── babble_5dB.wav
-│   │   └── babble_10dB.wav
-│   │
-│   ├── stoi_noisy.csv             # STOI scores for noisy signals
-│   ├── bp_responses.png           # Filter frequency responses
-│   ├── bp_spectrograms.png        # Clean, noisy, and filtered spectrograms
-│   └── bp_stoi.png                # STOI comparison plot
+├── docs/
+│   └── index.html                # HTML version of the notebook/report
 │
-├── voice_rec.wav                  # selected audio example
+├── miscilleaneous/               # Additional experiments
+│   ├── test.ipynb
+│   ├── nfft_sweep.csv
+│   └── recovery_results.csv
 │
-└── miscellaneous/        # experiments
+├── bandpass_outputs/             # Band-pass filter results
+│   └── bandpass.csv
+│
+├── outputs/                      # Generated noisy audio files
+│   ├── babble_-2dB.wav
+│   ├── babble_0dB.wav
+│   ├── babble_2dB.wav
+│   ├── babble_5dB.wav
+│   ├── babble_10dB.wav
+│   ├── machinegun_-2dB.wav
+│   ├── machinegun_0dB.wav
+│   ├── machinegun_2dB.wav
+│   ├── machinegun_5dB.wav
+│   ├── machinegun_10dB.wav
+│   ├── white_-2dB.wav
+│   ├── white_0dB.wav
+│   ├── white_2dB.wav
+│   ├── white_5dB.wav
+│   └── white_10dB.wav
+│
+├── babble.wav                    # Babble noise
+├── machinegun.wav                # Machine-gun noise
+├── white.wav                     # White noise
+├── voice_rec.wav                 # Voice recording
+├── image.png                     # Analysis image
+└── image-1.png                   # Analysis image
+
 ```
 
 ## Setup
@@ -191,7 +195,7 @@ Runtime: about 15 minutes. The random seed is fixed, so results are reproducible
 - sig2 (random phase):  -0.06849297798356647 and SI-SDR =  -23.266639530896768,STOI 0.86
 - A random PH1 gives a complex sig2  max|imag| = 5.93e-2 against max|real| = 6.37e-2; an odd PH1 with DC/Nyquist = 0 gives a real one 1.24e-17.
 - Recovery: from the scrambled signal, STOI 0.85 (no gain); with the true magnitude (oracle), STOI 0.99 but SI-SDR -25.19 dB.
-- Noise: STOI vs SNR table in `miscilleaneous/recovery_results.csv`[miscilleaneous/recovery_results.csv].
+- Noise: STOI vs SNR table in [miscilleaneous/recovery_results.csv](miscellaneous/recovery_results.ipynb).
 - Band-pass: SNR gain white 4.24 dB, machine gun 1.12 dB, babble 0.06 dB; change in STOI within ±0.0014.
 
 ## Assumptions and interpretations
