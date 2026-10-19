@@ -1,7 +1,7 @@
 # STFT Magnitude/Phase and STOI Analysis 
 
 Short description: experiments on the role of STFT magnitude and phase in speech, reconstruction from magnitude only, phase scrambling and recovery, and the effect of noise and band-pass filtering on STOI.
-Access notebook here: 
+Access notebook here: https://shreeshbhat04-ctrl.github.io/Assignment/
 
 ## Additional exploration
 See `miscillaneous/test.ipynb`[miscilleaneous/test.ipynb] for the parameter studies (window length, overlap, Griffin-Lim iterations, filter families and bands).
