@@ -5,7 +5,7 @@ Access notebook here:
 
 
 ## Additional exploration
-See `miscellaneous/test.ipynb` for the parameter studies (window length, overlap, Griffin-Lim iterations, filter families and bands).
+See `miscillaneous/test.ipynb`[miscilleaneous/test.ipynb] for the parameter studies (window length, overlap, Griffin-Lim iterations, filter families and bands).
 
 # Answers to all the questions
 - # What is the difference between the original and sig1. Give reasoning and analysis.
@@ -82,7 +82,7 @@ Fourth-order Butterworth, zero-phase, 100-4000 Hz seemed like correct choice. It
 ```bash
 STOI vs clean	-2 dB	0 dB	2 dB	5 dB	10 dB
 white	       0.690	0.732	0.773	0.826	0.893
-machinegun	   0.761	0.789	0.816	0.854	0.909
+machinegun	  0.761	0.789	0.816	0.854	0.909
 babble	       0.579	0.627	0.674	0.741	0.837
 ```
 - Filtering leaves STOI essentially unchanged in all 15 conditions. The change is between -0.0014 and +0.0011: babble -0.0011 to -0.0014, machine gun -0.0006 to +0.0001, white +0.0011 to -0.0013.
@@ -192,15 +192,14 @@ Runtime: about 15 minutes. The random seed is fixed, so results are reproducible
 - sig2 (random phase):  -0.06849297798356647 and SI-SDR =  -23.266639530896768,STOI 0.86
 - A random PH1 gives a complex sig2  max|imag| = 5.93e-2 against max|real| = 6.37e-2; an odd PH1 with DC/Nyquist = 0 gives a real one 1.24e-17.
 - Recovery: from the scrambled signal, STOI 0.85 (no gain); with the true magnitude (oracle), STOI 0.99 but SI-SDR -25.19 dB.
-- Noise: STOI vs SNR table in `miscilleaneous/recovery_results.csv`.
+- Noise: STOI vs SNR table in `miscilleaneous/recovery_results.csv`[miscilleaneous/recovery_results.csv].
 - Band-pass: SNR gain white 4.24 dB, machine gun 1.12 dB, babble 0.06 dB; change in STOI within ±0.0014.
 
 ## Assumptions and interpretations
 - "Inverse FT" is interpreted as the inverse STFT (per-frame inverse FFT with overlap-add).
 - "Recover the original" is interpreted as [phase retrieval with Griffin-Lim; reported both from the scrambled signal and from the true magnitude (oracle)].
-- "Repeat 2 to 5 for each noise" is interpreted as [..].
-- STOI reference: [..]; the filtered-clean reference is reported separately.
-- [Any other assumption: STFT parameters, noise segment choice, filter band.]
+- "Repeat 2 to 5 for each noise" is interpreted as calculating sig1 and sig2 then scramble and recover.
+
 
 ## Audio examples (`audio/`)
 | File | Description |
